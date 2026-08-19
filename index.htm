@@ -1,0 +1,537 @@
+
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茶叶占卜 (Tea Leaf Divination) - ร้านชาหอม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #f9f6f0;
+            --bg-card: #f0eae1;
+            --text-main: #4a4238;
+            --text-light: #7a7063;
+            --accent: #8c7b68;
+            --accent-hover: #6e5f50;
+            --white: #ffffff;
+            --shadow: rgba(74, 66, 56, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(249, 246, 240, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e8e2d5;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .logo-sub {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border-left: 1px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .cart-icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: var(--bg-card);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .cart-icon-btn:hover {
+            background-color: #e5dec9;
+        }
+
+        .cart-count {
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.75rem;
+            margin-left: 6px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            background: linear-gradient(rgba(74, 66, 56, 0.35), rgba(74, 66, 56, 0.35)), 
+                        url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 4rem 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent);
+            margin: 8px auto 0 auto;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(74, 66, 56, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+            font-weight: 300;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .add-btn {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid #dcd3c5;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.88rem;
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background-color: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+        }
+
+        /* Cart Slide-over Panel */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--bg-main);
+            z-index: 201;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .cart-panel.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e8e2d5;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #efe8dc;
+        }
+
+        .cart-item-info h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .cart-item-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #b56565;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .cart-footer {
+            border-top: 1px solid #e8e2d5;
+            padding-top: 1.5rem;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 3rem;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid #e8e2d5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-group">
+            <div class="logo-title">茶叶占卜</div>
+            <div class="logo-sub">ใบชาทำนาย & ชาหอมธรรมชาติ</div>
+        </div>
+        <button class="cart-icon-btn" onclick="toggleCart()">
+            ตะกร้าสินค้า <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>สัมผัสความสงบในทุกหยดชา</h1>
+            <p>ปล่อยให้กลิ่นหอมของใบชาเยียวยาจิตใจ และค้นพบคำตอบในถ้วยชาของคุณ</p>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <div class="container">
+        <h2 class="section-title">คอลเลกชันชาหอมแนะนำ</h2>
+        
+        <div class="product-grid">
+            <!-- Item 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=600&q=80" alt="ชาอู่หลงมะลิ" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">ชาอู่หลงมะลิ (Jasmine Oolong)</h3>
+                    <p class="product-desc">กลิ่นหอมอ่อนละมุนของดอกมะลิธรรมชาติ ผสานความนุ่มลึกของชาอู่หลง ช่วยให้จิตใจสงบร่มเย็น</p>
+                    <div class="product-bottom">
+                        <span class="product-price">350 ฿</span>
+                        <button class="add-btn" onclick="addToCart('ชาอู่หลงมะลิ', 350)">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" alt="ชาเขียวหลงจิ่ง" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">ชาเขียวหลงจิ่ง (Longjing Tea)</h3>
+                    <p class="product-desc">ชาเขียวชั้นเลิศ รสสัมผัสกลมกล่อม มีกลิ่นถั่วถั่วคั่วอ่อนๆ ให้ความรู้สึกสดชื่นและผ่อนคลาย</p>
+                    <div class="product-bottom">
+                        <span class="product-price">420 ฿</span>
+                        <button class="add-btn" onclick="addToCart('ชาเขียวหลงจิ่ง', 420)">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80" alt="ชาคาโมมายล์ลาเวนเดอร์" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">ชาดอกไม้ทำนาย (Divination Herbal)</h3>
+                    <p class="product-desc">ผสมผสานคาโมมายล์และลาเวนเดอร์ ปราศจากคาเฟอีน เหมาะสำหรับดื่มก่อนนอนเพื่อความผ่อนคลาย</p>
+                    <div class="product-bottom">
+                        <span class="product-price">290 ฿</span>
+                        <button class="add-btn" onclick="addToCart('ชาดอกไม้ทำนาย', 290)">เพิ่มลงตะกร้า</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay & Slide Panel -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h3>ตะกร้าสินค้าของคุณ</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart-msg">ยังไม่มีสินค้าในตะกร้า</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-price">
+                <span>ราคารวมทั้งหมด:</span>
+                <span id="totalAmount">0 ฿</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">ดำเนินการสั่งซื้อ</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 茶叶占卜 (Tea Leaf Divination). All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Cart Functionality -->
+    <script>
+        let cart = [];
+
+        function toggleCart() {
+            const overlay = document.getElementById('cartOverlay');
+            const panel = document.getElementById('cartPanel');
+            overlay.classList.toggle('active');
+            panel.classList.toggle('active');
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const totalAmount = document.getElementById('totalAmount');
+
+            // Update Total Count
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalCount;
+
+            // Update List
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">ยังไม่มีสินค้าในตะกร้า</p>';
+                totalAmount.textContent = '0 ฿';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.price} ฿ x ${item.quantity}</p>
+                    </div>
+                    <div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.name}')">ลบ</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            });
+
+            totalAmount.textContent = `${total} ฿`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('โปรดเลือกสินค้าลงตะกร้าก่อนทำการสั่งซื้อ');
+                return;
+            }
+            alert('ขอบคุณสำหรับการสั่งซื้อ! เรากำลังเตรียมชาหอมๆ ส่งตรงถึงคุณ');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+    </script>
+</body>
+</html>
